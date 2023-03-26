@@ -45,9 +45,6 @@ class Graph {
         double GetLongitude(const int i) const;
         double GetLatitude(const int i) const;
 
-        //Get the size of the vector
-        
-
         // Getters for the edge information
         int GetStartPoint(const int i) const;
         double GetEndPoint(const int i) const;
