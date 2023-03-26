@@ -1,13 +1,36 @@
 #include "graph.hpp"
 
-void Vertex::Set(const int v_id, const double lon, const double lat){ vertices.push_back({v_id, lon, lat}); }
-int Vertex::size_vector() const { return vertices.size(); }
-int Vertex::GetId(const int i) const { return vertices[i].id; }
-double Vertex::GetLongitude(const int i) const { return vertices[i].longitude; }
-double Vertex::GetLatitude(const int i) const { return vertices[i].latitude; }
+//Vertex
+void Vertex::Set(const int v_id, const double lon, const double lat){ 
+	id = v_id;
+	longitude = lon;
+	latitude = lat;
+}
 
-void Edge::Set(const int start, const int end, const double len){ edges.push_back({start, end, len}); }
-int Edge::size_vector() const{ return edges.size(); }
-int Edge::GetStartPoint(const int i) const { return edges[i].start_point; }
-double Edge::GetEndPoint(const int i) const { return edges[i].end_point; }
-double Edge::GetLength(const int i) const { return edges[i].length; }
+//Edge
+void Edge::Set(const int start, const int end, const double len){
+	start_point = start;
+	end_point = end;
+	length = len;
+}
+
+
+//Graph
+void Graph::addV(const Vertex v){
+	this->vertices.push_back(v);
+}
+void Graph::addE(const Edge e){
+	this->edges.push_back(e);
+}
+int Graph::size_vectorV() const { return this->vertices.size(); }
+int Graph::size_vectorE() const { return this->edges.size(); }
+
+int Graph::GetId(const int i) const { return this->vertices[i].id; }
+double Graph::GetLongitude(const int i) const { return this->vertices[i].longitude; }
+double Graph::GetLatitude(const int i) const { return this->vertices[i].latitude; }
+
+int Graph::GetStartPoint(const int i) const { return this->edges[i].start_point; }
+double Graph::GetEndPoint(const int i) const { return this->edges[i].end_point; }
+double Graph::GetLength(const int i) const { return this->edges[i].length; }
+
+

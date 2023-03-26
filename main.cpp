@@ -2,10 +2,12 @@
 
 int main() {
 
-    // Define the vectors to hold the vertex and edge information
+    //Define the vertex
     Vertex v;
-    //vector<Edge> edges;
+    //Define the Edge
     Edge e;
+    //Define the Graph object
+    Graph gr;
 
     // Define the input file name
     string filename = "../Resources/data.csv";
@@ -44,6 +46,7 @@ int main() {
 
             // Add the vertex information to the vertices vector
             v.Set(id_v, longitude, latitude);
+            gr.addV(v);
         }
 
         if(token=="E"){
@@ -64,19 +67,21 @@ int main() {
             // Add the edge information to the edges vector
             //edges.push_back({start_vertex, end_vertex, length});
             e.Set(start_vertex, end_vertex, length);
-        }   
+            gr.addE(e);
+        }
+
     }
     // Close the input file
     infile.close();
-
+    
     // Print the vertex and edge information
-    for (int i = 0; i < v.size_vector(); i++) {
-        cout << "Vertex " << v.GetId(i) << ": (" << v.GetLongitude(i) << ", " << v.GetLatitude(i) << ")" << endl;
+    for (int i = 0; i < gr.size_vectorV(); i++) {
+        cout << "Vertex " << gr.GetId(i) << ": (" << gr.GetLongitude(i) << ", " << gr.GetLatitude(i) << ")" << endl;
     }
-    for (int i = 0; i < e.size_vector(); i++) {
-        cout << "Edge " << i << ": (" << e.GetStartPoint(i) << ", " << e.GetEndPoint(i) << ", " << e.GetLength(i) << ")" << endl;
+    for (int i = 0; i < gr.size_vectorE(); i++) {
+        cout << "Edge " << i << ": (" << gr.GetStartPoint(i) << ", " << gr.GetEndPoint(i) << ", " << gr.GetLength(i) << ")" << endl;
     }
-
+    
 
 
 
