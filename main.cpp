@@ -13,13 +13,7 @@ int main(int argc, char *argv[]) {
     }
     */
 
-    cout << "main debug" << endl;
-
     vector<int> path = gr.BFS(42159 , 287);
-
-    cout << "main debug 2" << endl;
-
-
 
     cout << "The path you entered is: ";
     for (int i = 0; i < path.size(); i++) {
