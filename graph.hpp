@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <queue>
 
 using namespace std;
 
@@ -96,15 +97,13 @@ class Graph {
         //Get the size of the vector
         int size_vectorV() const;
         int size_vectorE() const;
-
+        //Vertices informations
         int GetId(const int i) const;
         double GetLongitude(const int i) const;
         double GetLatitude(const int i) const;
-
-        // Getters for the edge information
+        //Edges informations
         int GetStartPointId(const int i) const;
         double GetEndPointId(const int i) const;
         double GetLength(const int i) const;
-
-        void bfs(const int vstart, const int vend) const;
+        //Breadth First Search algorithm
 };
