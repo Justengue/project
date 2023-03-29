@@ -1,110 +1,109 @@
+//
+// GROUPE : BROSSIER COLLIN DESOUSA 29/03/2023
+//
+
 #pragma once
 
 #include <iostream>
+#include <cstdlib>
+#include <vector>
+#include <map>
 #include <fstream>
 #include <sstream>
 #include <vector>
-#include <queue>
+#define INF 2 << 22
 
-using namespace std;
 
-class Vertex {
-    public:
-        // Define a struct to hold the vertex coordinates
-        int id;
-        double longitude;
-        double latitude;
+// Creation of our class Vertex 
+// This class contain vertices elements : id, longitude, latitude
+class Vertex{
     
-        //Set the vertices coordinates
-        void Set(const int v_id, const double lon, const double lat);
+protected:
+    uint32_t id;
+    double longitude;
+    double latitude;
+    double weight = INF;
+    double estimate = 0;
+    
+public:
+    //Constructors
+    Vertex(const uint32_t i, const double lo, const double la) : id(i), longitude(lo), latitude(la) {}
+    Vertex(const Vertex &v){
+        id = v.id;
+        longitude = v.longitude;
+        latitude = v.latitude;
+        weight = v.weight;
+        estimate = v.estimate;
+    }
+    Vertex() {}
+
+    uint32_t prev;
+    
+    uint32_t getId(){ return id; }
+    double getLong() { return longitude; }
+    double getLat() { return latitude; }
+    double getW() { return weight; }
+    void setW(const double w){ weight = w; }
+    double getE(){ return estimate; }
+    void setE(const double e){ estimate = e; }
+
+    //Compare two vertices
+    friend bool operator==(const Vertex v1, const Vertex v2){
+
+        return (v1.id == v2.id && v1.latitude == v2.latitude && v1.longitude == v2.longitude); //&& v1.weight == v2.weight);
+    }
+
+    //Overload of the = operator
+    Vertex &operator=(const Vertex &v){
+
+        id = v.id;
+        longitude = v.longitude;
+        latitude = v.latitude;
+        weight = v.weight;
+        estimate = v.estimate;
+
+        return *this;
+    }
 };
 
+// Creation of our class Edge
+// This class contain edges elements : startID, endID, length
 class Edge {
-    public:
-        int startVId;
-        int endVId;
-        double length;
+    
+protected:
+    int startId;
+    int endId;
+    double length;
+    
+public:
+    //Constructor
+    Edge(int v1, int v2, double d) : startId(v1), endId(v2), length(d) {}
+    
+    uint32_t getStartId(){ return startId; }
+    uint32_t getEndId(){ return endId; }
+    double getLength(){ return length; }
 
-        //Set the edges coordinates
-        void Set(const int start, const int end, const double len);        
+    //Compare two edges
+    friend bool operator==(Edge e1, Edge e2){
+
+        return(e1.getStartId() == e2.getStartId() && e1.getEndId() == e2.getEndId() && e1.getLength() == e2.getLength());
+    }
 };
+
 
 class Graph {
-    private:
-        vector<Vertex> vertices;
-        vector<Edge> edges;
-    public:
-        Graph(string filename) {
-            Vertex v;
-            Edge e;
-            // Open the input file
-            ifstream infile(filename);
-            if (!infile.is_open()) {
-                cerr << "Error: Could not open input file " << filename << endl;
-            }
-            string line;
+protected:
+    std::map<int, Vertex> vertList;
+    std::vector<Edge> edgeList;
+    
+public:
+    Graph(const std::string fileName);
 
-            while (getline(infile, line)) {
-                stringstream ss(line);
-                string token;
-                getline(ss,token, ',');
-
-                if(token=="V"){
-                    // Read the first token as the vertex ID
-                    int id_v;
-                    getline(ss, token, ',');
-                    id_v=stoi(token);
-                    // Read the second token as the longitude
-                    double longitude;
-                    getline(ss, token, ',');
-                    longitude = stod(token);
-                    // Read the third token as the latitude
-                    double latitude;
-                    getline(ss, token, ',');
-                    latitude = stod(token);
-                    // Add the vertex information to the vertices vector
-                    v.Set(id_v, longitude, latitude);
-                    this->vertices.push_back(v);
-                }
-
-                if(token=="E"){
-                // Read the remaining tokens as edges
-                    // Parse the edge information
-                    int start_vertex;
-                    getline(ss, token, ',');
-                    start_vertex = stoi(token);
-
-                    int end_vertex;
-                    getline(ss, token, ',');
-                    end_vertex = stoi(token);
-
-                    double length;
-                    getline(ss, token, ',');
-                    length = stod(token);
-
-                    // Add the edge information to the edges vector
-                    //edges.push_back({start_vertex, end_vertex, length});
-                    e.Set(start_vertex, end_vertex, length);
-                    this->edges.push_back(e);
-                }
-
-            }
-            // Close the input file
-            infile.close();
-
-        }
-        
-        //Get the size of the vector
-        int size_vectorV() const;
-        int size_vectorE() const;
-        //Vertices informations
-        int GetId(const int i) const;
-        double GetLongitude(const int i) const;
-        double GetLatitude(const int i) const;
-        //Edges informations
-        int GetStartPointId(const int i) const;
-        double GetEndPointId(const int i) const;
-        double GetLength(const int i) const;
-        //Breadth First Search algorithm
-        vector<int> Bfs(const int start, const int end) const;
+    Edge getEdge(Vertex v1, Vertex v2);
+    
+    void neighbors(const Vertex v, std::vector<Vertex> &list);
+    std::vector<uint32_t> bfs(uint32_t vstart, uint32_t vstop);
+    void dijkstra(uint32_t vstart, uint32_t vstop);
+    void astar(uint32_t vstart, uint32_t vstop);
 };
+
