@@ -1,3 +1,0 @@
-Example :
-
-g++ -Wall -o graph main.cpp graph.cpp ; ./graph --start 86771 --end 110636 --algo dijkstra --file data_area.txt
