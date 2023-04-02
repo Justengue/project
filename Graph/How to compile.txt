@@ -1,0 +1,20 @@
+How to compile the programme 
+
+Examples :
+
+BFS :
+
+g++ -Wall -o graph main.cpp graph.cpp
+./graph --start 42159 --end 287 --algo bfs --file data.txt
+
+
+DIJKSTRA :
+
+g++ -Wall -o graph main.cpp graph.cpp
+./graph --start 42159 --end 287 --algo dijkstra --file data.txt
+
+
+ASTAR :
+
+g++ -Wall -o graph main.cpp graph.cpp
+./graph --start 42159 --end 287 --algo astar --file data.txt
