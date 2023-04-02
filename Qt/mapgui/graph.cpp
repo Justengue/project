@@ -38,6 +38,7 @@ Graph::Graph(const string file){
         cout << "Graph created from " << file << " : " << v_counter << " vertex and " << e_counter << " edges added." << endl;
     }
     fin.close();
+    MinMaxLongLat();
 }
 
 vector<Vertex> Graph::getAllVertices(){
@@ -48,7 +49,7 @@ vector<Vertex> Graph::getAllVertices(){
     return allVertex;
 }
 
-vector<double> Graph::MinMaxLongLat(){
+void Graph::MinMaxLongLat(){
     vector<double> MinMaxLongLat={10000000.0,-10000000.0,10000000.0,-10000000.0};
     vector<Vertex> allVertex = getAllVertices();
     for(uint32_t i=0; i<allVertex.size(); i++){
@@ -57,7 +58,10 @@ vector<double> Graph::MinMaxLongLat(){
         if(allVertex[i].getLat()<MinMaxLongLat[2]) MinMaxLongLat[2]=allVertex[i].getLat();
         if(allVertex[i].getLat()>MinMaxLongLat[3]) MinMaxLongLat[3]=allVertex[i].getLat();
     }
-    return MinMaxLongLat;
+    minLong = MinMaxLongLat[0];
+    maxLong = MinMaxLongLat[1];
+    minLat = MinMaxLongLat[2];
+    maxLat = MinMaxLongLat[3];
 }
 
 vector<Edge> Graph::getAllEdges(){ return edgeList; }

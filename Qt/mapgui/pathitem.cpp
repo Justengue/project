@@ -1,4 +1,4 @@
-#include "vertexitem.h"
+#include "pathitem.h"
 #include <regex>
 #include <sstream>
 
@@ -9,29 +9,29 @@
 
 #define R 1
 
-VertexItem::VertexItem(Vertex &v){
+PathItem::PathItem(Vertex &v){
     vid_ = v.getId();
     x_ = v.getX();
     y_ = v.getY();
-    color_ = QColor(128, 109, 52);
+    color_ = QColor(255, 255, 255);
     setFlags(ItemIsSelectable);
     setAcceptHoverEvents(true);
     setPos(x_, y_);
 }
 
-QRectF VertexItem::boundingRect() const
+QRectF PathItem::boundingRect() const
 {
   return QRectF(0.0,0.0,20.0,20.0);
 }
 
-QPainterPath VertexItem::shape() const
+QPainterPath PathItem::shape() const
 {
     QPainterPath path;
     path.addEllipse(0.0,0.0,20.0,20.0);
     return path;
 }
 
-void VertexItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget */*widget*/)
+void PathItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget */*widget*/)
 {
 
     QColor fillColor = (option->state & QStyle::State_Selected) ? color_.darker(150) : color_;

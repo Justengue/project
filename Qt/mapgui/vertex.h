@@ -8,8 +8,11 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <cmath>
 
 #define INF 2 << 22
+
+extern double minLat, maxLat, minLong, maxLong;
 
 class Vertex{
 protected:
@@ -34,6 +37,8 @@ public:
     void setW(const double w);
     double getE();
     void setE(const double e);
+    double getX();
+    double getY();
 
     //Compare two vertices
     friend bool operator==(const Vertex v1, const Vertex v2){

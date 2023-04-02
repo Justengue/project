@@ -16,7 +16,7 @@ public:
 
     vector<Vertex> getAllVertices();
     vector<Edge> getAllEdges();
-    vector<double> MinMaxLongLat();
+    void MinMaxLongLat();
     Edge getEdge(Vertex v1, Vertex v2);
 
     void neighbors(const Vertex v, vector<Vertex> &list);

@@ -2,6 +2,9 @@
 // SPDX-License-Identifier: LicenseRef-Qt-Commercial OR BSD-3-Clause
 
 #include "view.h"
+#include "graph.h"
+#include "edgeitem.h"
+#include "pathitem.h"
 
 #include <QtWidgets>
 #include <QtMath>
@@ -101,6 +104,8 @@ View::View(const QString &name, QWidget *parent)
     selectAstarButton_->setText(tr("Astar"));
     selectAstarButton_->setCheckable(true);
     selectAstarButton_->setChecked(false);
+
+
 
     QButtonGroup *pointerModeGroup = new QButtonGroup(this);
     pointerModeGroup->setExclusive(true);

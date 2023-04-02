@@ -16,6 +16,7 @@ qt_add_executable(mapgui
     graph.h graph.cpp
     vertex.h vertex.cpp
     edge.h edge.cpp
+    pathitem.h pathitem.cpp
 )
 
 set_target_properties(mapgui PROPERTIES

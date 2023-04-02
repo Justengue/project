@@ -8,22 +8,21 @@
 #include <QColor>
 #include <QStyleOptionGraphicsItem>
 
-EdgeItem::EdgeItem(Vertex &start, Vertex &end): startP(start.getLat(), start.getLong()), endP(end.getLat(), end.getLong()) {
+EdgeItem::EdgeItem(Vertex &start, Vertex &end): startP(start.getX(), start.getY()), endP(end.getX(), end.getY()) {
     color_ = QColor(128, 109, 52);
     setFlags(ItemIsSelectable);
-    setPos(startX_, startY_);
 }
 
 QRectF EdgeItem::boundingRect() const
 {
-  return QRectF(qMin(startX_, endX_), qMin(startY_, endY_),
-                qAbs(endX_ - startX_), qAbs(endY_ - startY_));
+  return QRectF(startP, endP).normalized();
 }
 
 void EdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    QPointF offset(10, 10);
     QPen pen(color_);
-    int width = 10;
+    int width = 3;
     if (option->state & QStyle::State_Selected) {
       width += 2;
     }
@@ -31,6 +30,6 @@ void EdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     pen.setWidth(width);
 
     painter->setPen(pen);
-    painter->drawLine(0, 0, 0, 0);
+    painter->drawLine(startP+offset, endP+offset);
 }
 
