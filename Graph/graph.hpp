@@ -49,7 +49,23 @@ public:
     double getE(){ return estimate; }
     void setE(const double e){ estimate = e; }
 
-    
+
+    double getX(){
+        const double R=6371000;
+        const double lambda=M_PI*64.56/180; 
+        const double phi=M_PI*18.26/180;
+        const double R0=R*cos(phi);
+        return R0*M_PI*(this->getLong()-lambda)/180;
+    }
+
+    double getY(){
+        const double R=6371000;  
+        const double phi=M_PI*18.26/180;
+        return R*log(tan(M_PI/4+M_PI*(this->getLat()-phi)/360));
+    }
+
+
+    /*
     double getX(){
         
         const double R0 = 6371.0;
@@ -81,7 +97,7 @@ public:
         y = ay * R0 * log(tan((this->getLat() - lat_center) / 2 + M_PI / 4)) + by;
 
         return y;
-    }
+    }*/
 
 
     //Compare two vertices

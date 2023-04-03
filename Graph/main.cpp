@@ -37,7 +37,7 @@ int main(int argc, const char * argv[]) {
     
     vector<Edge> allEdge = graph.getAllEdges();
 
-/*
+    /*
     for(uint32_t i=0; i<15; i++){
         cout<<"X :"<<allVertex[i].getX()<<"\tY :"<<allVertex[i].getY()<<endl;
     }
